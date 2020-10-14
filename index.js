@@ -45,9 +45,10 @@ app.get("/oauth/redirect", (req, res) => {
         // redirect the user to the welcome page, along with the access token
         res.redirect(`/welcome.html?access_token=${accessToken}`);
     });
+    server.listen(port, () => {
+    console.log("server starting on port :" + port)
+    });
 });
 
 // Start the server on port 8090
-server.listen(port, () => {
-    console.log("server starting on port :" + port)
-});
+
