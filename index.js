@@ -22,7 +22,7 @@ app.get("/oauth/redirect", (req, res) => {
     // were sent to this route. We want the `code` param
     var key = fs.readFileSync("selfsigned.key");
     var cert = fs.readFileSync("selfsigned.cr");
-    var oprtions = {key: key, cert: cert};
+    var options = {key: key, cert: cert};
 
     var serve = http.createServer(app);
     var server = https.createServer(options, app);
