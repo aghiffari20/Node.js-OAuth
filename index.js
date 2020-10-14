@@ -21,12 +21,6 @@ app.use(express.static(__dirname + "/public"));
 app.get("/oauth/redirect", (req, res) => {
     // The req.query object has the query params that
     // were sent to this route. We want the `code` param
-    var key = fs.readFileSync("selfsigned.key");
-    var cert = fs.readFileSync("selfsigned.cr");
-    var options = {key: key, cert: cert};
-
-    var serve = http.createServer(app);
-    var server = https.createServer(options, app);
     const requestToken = req.query.code;
     axios({
         // make a POST request
@@ -45,10 +39,15 @@ app.get("/oauth/redirect", (req, res) => {
         // redirect the user to the welcome page, along with the access token
         res.redirect(`/welcome.html?access_token=${accessToken}`);
     });
-    server.listen(port, () => {
-    console.log("server starting on port :" + port)
-    });
 });
+var key = fs.readFileSync("selfsigned.key");
+var cert = fs.readFileSync("selfsigned.cr");
+var options = {key: key, cert: cert};
+
+var serve = http.createServer(app);
+var server = https.createServer(options, app);
 
 // Start the server on port 8090
-
+server.listen(port, () => {
+    console.log("server starting on port :" + port)
+});
