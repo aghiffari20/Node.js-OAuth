@@ -6,13 +6,6 @@ const axios = require("axios");
 const http = require("http");
 const https = require("https");
 const fs = require("fs");
-
-var key = fs.readFileSync("selfsigned.key");
-var cert = fs.readFileSync("selfsigned.cr");
-var oprtions = {key: key, cert: cert};
-
-var serve = http.createServer(app);
-var server = https.createServer(options, app);
 // This is the client ID and client secret that you obtained
 // while registering the application
 const clientID = "192f7dbf7e751574b0e3";
@@ -27,6 +20,12 @@ app.use(express.static(__dirname + "/public"));
 app.get("/oauth/redirect", (req, res) => {
     // The req.query object has the query params that
     // were sent to this route. We want the `code` param
+    var key = fs.readFileSync("selfsigned.key");
+    var cert = fs.readFileSync("selfsigned.cr");
+    var oprtions = {key: key, cert: cert};
+
+    var serve = http.createServer(app);
+    var server = https.createServer(options, app);
     const requestToken = req.query.code;
     axios({
         // make a POST request
