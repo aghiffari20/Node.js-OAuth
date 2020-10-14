@@ -8,7 +8,7 @@ const https = require("https");
 const fs = require("fs");
 
 var key = fs.readFileSync("selfsigned.key");
-var cert = fs.readFileSync("selfsigned.crt");
+var cert = fs.readFileSync("selfsigned.cr");
 var oprtions = {key: key, cert: cert};
 
 var serve = http.createServer(app);
