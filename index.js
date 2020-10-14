@@ -6,6 +6,7 @@ const axios = require("axios");
 const http = require("http");
 const https = require("https");
 const fs = require("fs");
+const port = 8090
 // This is the client ID and client secret that you obtained
 // while registering the application
 const clientID = "192f7dbf7e751574b0e3";
@@ -47,4 +48,6 @@ app.get("/oauth/redirect", (req, res) => {
 });
 
 // Start the server on port 8090
-app.listen(8090);
+server.listen(port, () => {
+    console.log("server starting on port :" + port)
+});
