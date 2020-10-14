@@ -3,7 +3,16 @@ const express = require("express");
 
 // Import the axios library, to make HTTP requests
 const axios = require("axios");
+const http = require("http");
+const https = require("https");
+const fs = require("fs");
 
+var key = fs.readFileSync("selfsigned.key");
+var cert = fs.readFileSync("selfsigned.crt");
+var oprtions = {key: key, cert: cert};
+
+var serve = http.createServer(app);
+var server = https.createServer(options, app);
 // This is the client ID and client secret that you obtained
 // while registering the application
 const clientID = "192f7dbf7e751574b0e3";
